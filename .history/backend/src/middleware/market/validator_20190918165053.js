@@ -17,7 +17,7 @@ module.exports = {
                     check('email').not().isEmpty().withMessage(message).isEmail().withMessage('Enter a valid email address'),
                     check('role').not().isEmpty().withMessage(message).isNumeric().withMessage('nter a valid role'),
                     check('username').not().isEmpty().withMessage(message),
-                    check('password').not().isEmpty().withMessage(message).isLength({ min: 7 }).withMessage('Must be more than 7 chars').isAlphanumeric().withMessage('provide a strong alphanumeric password').custom((value, { req }) => {
+                    check('password').not().isEmpty().withMessage(message).isLength({ min: 7 }).withMessage('Must be more than 7 chars').custom((value, { req }) => {
                         if (value !== req.body.confirmPassword)
                             throw new Error('Password does not match')
 
@@ -51,10 +51,7 @@ module.exports = {
                 return [
                     check('password').not().isEmpty().withMessage(message).isAlphanumeric().withMessage('provide a strong password').isLength({ min: 7 }).withMessage('requires 7 characters'),
                     check('confirmPassword').not().isEmpty().withMessage(message).custom((value, { req }) => {
-                        if (value !== req.body.password)
-                            throw new Error('Password does not match');
 
-                        if (value.toLowerCase().includes('1234567') || value.toLowerCase().includes('password')) throw new Error('Error can not contain password or 12345678');
                     })
                 ]
             default: return []

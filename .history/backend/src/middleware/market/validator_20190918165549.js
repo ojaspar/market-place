@@ -47,7 +47,7 @@ module.exports = {
                 return [
                     check('email').not().isEmpty().withMessage(message)
                 ]
-            case 'changePassword':
+            case 'resetPassword':
                 return [
                     check('password').not().isEmpty().withMessage(message).isAlphanumeric().withMessage('provide a strong password').isLength({ min: 7 }).withMessage('requires 7 characters'),
                     check('confirmPassword').not().isEmpty().withMessage(message).custom((value, { req }) => {
@@ -57,6 +57,7 @@ module.exports = {
                         if (value.toLowerCase().includes('1234567') || value.toLowerCase().includes('password')) throw new Error('Error can not contain password or 12345678');
                     })
                 ]
+            case 'changePassword':
             default: return []
         }
     }
