@@ -1,0 +1,28 @@
+const MarketModel = require('../../models/market/Market');
+const bcrypt = require('bcrypt');
+const creatErrors = require('http-errors');
+const hashcode = 10;
+// const {createValidation} = require('../../middleware/market/validator');
+// const errors = require('../../middleware/token');
+const changePassword = async (req, res, next) => {
+    const { password } = req.body;
+    const { user } = req;
+    // find market
+    try {
+        const passwordHash = await bcrypt.hash(password, hashcode);
+        const market = await MarketModel.findOneAndUpdate({
+            email: user.email
+        }, {
+            $set: {
+                password: passwordHash
+            }
+        }, {
+            new: true,
+            runValidators: true
+        });
+        if (!market) return next(creatErrors(404, 'Market not found'))
+    } catch (e) {
+
+    }
+
+}
