@@ -1,0 +1,1 @@
+const MarketModel = require('../../models/market/Market')
