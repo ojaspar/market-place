@@ -61,8 +61,7 @@ module.exports = {
                 return [
                     check('productName').not().isEmpty().withMessage(message),
                     check('productDescription').not().isEmpty().withMessage(message),
-                    check('productQuantity').not().isEmpty().withMessage(message).isNumeric().withMessage('Enter a valid number'),
-                    check('avater').not().isEmpty().isBase64().withMessage('Upload a valid image')
+                    check('productQuantity').not().isEmpty().withMessage(message).isNumeric().withMessage('Enter a valid number')
                 ]
             default: return []
         }
