@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const createError = require('http-errors');
 const marketModel = require('../../models/market/Market');
 const { hashcode } = require('../../../config/key');
-const { confirmationCode } = ('../../middleware/key.js');
+const { confirmationCode } = ('../../middleware/token.js');
 const register = async (req, res) => {
     const { username, lastname, email, phone, marketName, address, state, firstname, password, role } = req.body;
     try {
