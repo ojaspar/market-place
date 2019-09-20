@@ -17,7 +17,6 @@ const newPassword = async (req, res, next) => {
         const hashPassword = bcrypt.hash(newPassword, hashcode);
         const changedPassword = await MarketModel.findOneAndUpdate({
             email: user.email
-
         }, {
             $set: {
                 password: hashPassword
