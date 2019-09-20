@@ -1,7 +1,7 @@
 const MarketModel = require('../../models/market/Market');
 const bcrypt = require('bcrypt');
 const creatErrors = require('http-errors');
-const hashcode = 10;
+const { hashcode } = require('../../../config/key')
 const changePassword = async (req, res, next) => {
     const { password } = req.body;
     const { user } = req;

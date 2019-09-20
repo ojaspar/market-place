@@ -47,7 +47,7 @@ module.exports = {
                 return [
                     check('email').not().isEmpty().withMessage(message)
                 ]
-            case 'changePassword':
+            case 'newPassword':
                 return [
                     check('password').not().isEmpty().withMessage(message).isAlphanumeric().withMessage('provide a strong password').isLength({ min: 7 }).withMessage('requires 7 characters'),
                     check('confirmPassword').not().isEmpty().withMessage(message).custom((value, { req }) => {
