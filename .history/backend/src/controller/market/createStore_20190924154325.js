@@ -1,0 +1,22 @@
+const bcrypt = require('bcrypt');
+const createError = require('http-errors');
+const marketModel = require('../../models/market/Market');
+const { hashcode } = require('../../../config/key');
+const { confirmationCode } = ('../../middleware/key.js');
+const wallet = require('../../shared/wallet');
+const register = async (req, res) => {
+    const { username, lastname, email, phone, marketName, address, state, firstname, password, role } = req.body;
+    try {
+        const passwordHash = await bcrypt.hash(password, hashcode);
+        const createMarket = new marketModel({
+            email, state, phone, username, firstname, lastname, marketName, address, password: passwordHash, role, token: confirmationCode
+        });
+        const newWallet = wallet(createMarket._id);
+        await newWallet.save();
+        await createMarket.save();
+        res.status(201).send({ message: 'Market created', createMarket, token: confirmationCode })
+    } catch (e) {
+        return createError(500).send(e.message)
+    }
+}
+module.exports = register;
