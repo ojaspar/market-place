@@ -13,14 +13,10 @@ const updateProduct = async (req, res) => {
         if (!market) return next(createError(404, 'Market not found'));
         const isInclude = await updates.every(update => allowedUpdates.includes(update));
         if (!isInclude) return next(createError(403, 'Invalid Update'));
-        // find product
-        const product = await ProductModel.findOne({ _id: productId });
-        if (!product) return next(createError(404, 'Product not found'));
-        updates.forEach(update => (product[update] = req.body[update]));
-        await product.save();
-        res.status(200).send(product);
+
+
     } catch (e) {
-        return next(createError(500, e.message));
+
     }
 }
 module.exports = updateProduct;

@@ -19,8 +19,9 @@ const updateProduct = async (req, res) => {
         updates.forEach(update => (product[update] = req.body[update]));
         await product.save();
         res.status(200).send(product);
+
     } catch (e) {
-        return next(createError(500, e.message));
+
     }
 }
 module.exports = updateProduct;

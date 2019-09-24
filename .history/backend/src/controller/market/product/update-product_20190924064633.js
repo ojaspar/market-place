@@ -17,10 +17,10 @@ const updateProduct = async (req, res) => {
         const product = await ProductModel.findOne({ _id: productId });
         if (!product) return next(createError(404, 'Product not found'));
         updates.forEach(update => (product[update] = req.body[update]));
-        await product.save();
-        res.status(200).send(product);
+
+
     } catch (e) {
-        return next(createError(500, e.message));
+
     }
 }
 module.exports = updateProduct;
