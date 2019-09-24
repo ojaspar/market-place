@@ -16,7 +16,7 @@ const register = async (req, res) => {
         await createMarket.save();
         res.status(201).send({ message: 'Market created', createMarket, token: confirmationCode })
     } catch (e) {
-        createError(500).send(e.message)
+        return createError(500).send(e.message)
     }
 }
 module.exports = register;
