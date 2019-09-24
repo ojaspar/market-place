@@ -22,7 +22,7 @@ const search = async (req, res, next) => {
                 "active"
         });
         console.log(marketInfo)
-        res.send(marketInfo)
+        res.send(marketInfo);
 
     } catch (e) {
         return next(createError(e.message));

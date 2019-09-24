@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const passport = require('passport');
-const { secret } = require('../../../config/key')
+const { secret } = require('../../../config/key');
+
 module.exports = (req, res) => {
     passport.authenticate("MarketLogin", { session: false }, (error, user) => {
         if (error || !user) return res.status(400).send(error);
